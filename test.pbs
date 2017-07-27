@@ -1,0 +1,28 @@
+#!/bin/bash
+#PBS -P r78
+#PBS -q express
+#PBS -l walltime=00:01:00,mem=2048MB,ncpus=32
+#PBS -l wd
+
+
+module use /g/data/v10/public/modules/modulefiles
+module load agdc-py3-prod
+
+mynohup () {
+    [[ "$1" = "" ]] && echo "usage: mynohup python_script" && return 0
+    nohup python -u "$1" > "${1%.*}.log" 2>&1 < /dev/null &
+}
+
+mykill() {
+    ps -ef | grep "$1" | grep -v grep | awk '{print $2}' | xargs kill
+    echo "process "$1" killed"
+}
+
+mynohup head.py
+
+pbsdsh python worker.py $HOSTNAME
+
+sleep 10s
+
+mykill head.py
+
