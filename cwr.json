@@ -1,0 +1,1 @@
+{"endpoint": "ES-ENDPOINT-HERE", "metrics": {"AWS/EBS": ["VolumeReadBytes", "VolumeWriteBytes"], "AWS/RDS": ["CPUUtilization", "FreeStorageSpace", "FreeableMemory"], "AWS/CloudFront": ["Requests", "BytesDownloaded", "BytesUploaded", "TotalErrorRate", "4xxErrorRate", "5xxErrorRate"]}, "measurement": "Average"}
